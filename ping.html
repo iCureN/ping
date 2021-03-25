@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ping值检测</title>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+    <div>js测速
+        <p>线路一：<span>ss0</span></p>
+        <p>线路二：<span>ss1</span></p>
+        <p>线路三：<span>ss2</span></p>
+        </div>
+</body>
+<script>
+    var ping = 0,urlList = ['htt1ps://www.vipiu.net','https://www.baidu.com','https://www.qq.com'];
+    setInterval("ping++",100);
+    newRequest();
+    function newRequest(){
+     for(var i=0;i<urlList.length;i++){
+     $("p").eq(i).find('span').html('测速中...');
+     $("p").eq(i).find('span').append('<img src="' + urlList[i] + '?' + Math.random() + '" width="1" height="1" style="display:none" onerror=autotest(' +i+ ') >');
+     console.log(ping);
+     }
+    }
+    function autotest(i){
+     $("p").eq(i).find("span").text(ping*100+"ms");
+    }
+    </script>
+</html>
